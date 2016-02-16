@@ -1,0 +1,22 @@
+
+{
+  "locales": [
+    {
+      "generatedName": "{{locale}}_generated_trips",
+      "template": "template_screenshots_geocode_trips",
+      "url_search": ["/api/v2/trips"]
+    },
+    {
+      "generatedName": "{{locale}}_generated_geocode_{{departure}}",
+      "template": "template_screenshots_geocode_departure",
+      "url_search": ["/api/v2/trips"]
+    },
+    {
+      "generatedName": "{{locale}}_generated_geocode_{{arrival}}",
+      "template": "template_screenshots_geocode_arrival",
+      "url_search": ["/api/v2/trips"]
+    }
+
+  ]
+
+}
