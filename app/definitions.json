@@ -2,21 +2,19 @@
 {
   "locales": [
     {
-      "generatedName": "{{locale}}_generated_trips",
-      "template": "template_screenshots_geocode_trips",
-      "url_search": ["/api/v2/trips"]
+      "generatedName": "{{locale}}_generated_stream",
+      "template": "template_stream",
+      "url_search": ["/api/v2/stream"]
     },
     {
-      "generatedName": "{{locale}}_generated_geocode_{{departure}}",
-      "template": "template_screenshots_geocode_departure",
-      "url_search": ["/api/v2/trips"]
+      "generatedName": "{{locale}}_generated_search_{{hashtag}}",
+      "template": "template_search_hashtag",
+      "url_search": ["/api/v2/search"]
     },
     {
-      "generatedName": "{{locale}}_generated_geocode_{{arrival}}",
-      "template": "template_screenshots_geocode_arrival",
-      "url_search": ["/api/v2/trips"]
+      "generatedName": "{{locale}}_generated_user_profile_{{username}}",
+      "template": "template_user_profile_username",
+      "url_search": ["/api/v2/user"]
     }
-
   ]
-
 }
