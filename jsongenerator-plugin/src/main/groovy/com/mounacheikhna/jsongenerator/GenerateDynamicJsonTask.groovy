@@ -30,18 +30,17 @@ class GenerateDynamicJsonTask extends DefaultTask implements GenerateDynamicJson
         generateDynamicJsons(locale, jsonPropertiesFilePath, propertiesPath, imagesPropertiesFilePath)
     }
 
-    void generateDynamicJsons(String locale, String jsonPropetiesPath, String propertiesPath, String imagesPropertiesFilePath) {
+    void generateDynamicJsons(String locale, String jsonPropetiesPath, String propertiesPath, String imagesPropertiesPath) {
         File generatedFolder = new File("${project.projectDir.getPath()}/generated")
-        generatedFiles.mkdirs()
-        def definitions = slurper.parse(new File("${getProject().projectDir.getPath()}/definitions.json"))
-        println "definitions : $definitions"
+        generatedFolder.mkdirs()
+        def definitions = slurper.parse(new File("${getProject().projectDir.getPath()}/${jsonPropetiesPath}.json"))
 
         definitions.locales.each {
-            println "local data : $it"
             String generatedFileName = it.generatedName.replace("{{locale}}", locale);
             File generatedFile = new File("${generatedFolder.getPath()}/$generatedFileName")
             File templateFile = new File("${it.template}.json")
 
+            //TODO: get custom data and pass it here
             fillPlaceholders(templateFile, generatedFile, new HashedMap<>());
         }
     }
