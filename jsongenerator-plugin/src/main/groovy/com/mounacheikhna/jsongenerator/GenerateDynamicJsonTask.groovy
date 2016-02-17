@@ -1,5 +1,10 @@
 package com.mounacheikhna.jsongenerator
 
+import groovy.json.JsonSlurper
+import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.TaskAction
+
+
 /**
  * Created by m.cheikhna on 16/02/2016.
  */
@@ -12,23 +17,30 @@ class GenerateDynamicJsonTask extends DefaultTask implements GenerateDynamicJson
 
     private List<File> generatedFiles
     private String productFlavor
+    private JsonSlurper slurper
 
     @TaskAction
     void performTask() {
-        generatedFiles = new ArrayList<>()
-        if(!new File(propertiesPath).exists()) {
+        if(!new File("${getProject().projectDir.getPath()}/$propertiesPath").exists()) {
             throw new IllegalArgumentException("Please provide a correct path to properties file : $propertiesPath ")
         }
+        slurper = new JsonSlurper()
         generateDynamicJsons(locale, jsonPropertiesFilePath, propertiesPath, imagesPropertiesFilePath)
     }
 
     void generateDynamicJsons(String locale, String jsonPropetiesPath, String propertiesPath, String imagesPropertiesFilePath) {
-
         //for now since in properties file we only have -> But maybe a json config instead would be better
-        Properties properties = ParseUtils.parseProperties(jsonPropetiesPath)
-        properties.findAll { k, v -> k.contains("template") }.each {
+        /*Properties properties = ParseUtils.parseProperties(jsonPropetiesPath)
+          properties.findAll { k, v -> k.contains("template") }.each {
             generatedJsonName, templateName ->
                 println " "
+        }*/
+
+        def definitions = slurper.parse(new File("${getProject().projectDir.getPath()}/definitions.json"))
+        println "definitions : $definitions"
+
+        definitions.locales.each {
+            println "local data : $it"
         }
     }
 
@@ -53,8 +65,8 @@ class GenerateDynamicJsonTask extends DefaultTask implements GenerateDynamicJson
     }
 
     @Override
-    void jsonPropertiesFilePath(String productFlavor) {
-        this.productFlavor = productFlavor
+    void jsonPropertiesFilePath(String jsonPropertiesFilePath) {
+        this.jsonPropertiesFilePath = jsonPropertiesFilePath
     }
 
     interface GenerateDynamicJsonSpec  {
