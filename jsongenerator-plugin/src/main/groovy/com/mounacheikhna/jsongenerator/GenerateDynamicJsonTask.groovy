@@ -26,8 +26,8 @@ class GenerateDynamicJsonTask extends DefaultTask implements GenerateDynamicJson
             throw new IllegalArgumentException("Please provide a correct path to properties file : $propertiesPath ")
         }
         slurper = new JsonSlurper()
-
         generateDynamicJsons(locale, jsonPropertiesFilePath, propertiesPath, imagesPropertiesFilePath)
+
     }
 
     void generateDynamicJsons(String locale, String jsonPropetiesPath, String propertiesPath, String imagesPropertiesPath) {
@@ -41,7 +41,7 @@ class GenerateDynamicJsonTask extends DefaultTask implements GenerateDynamicJson
             File templateFile = new File("${it.template}.json")
 
             //TODO: get custom data and pass it here
-            fillPlaceholders(templateFile, generatedFile, new HashedMap<>());
+            generatedFiles.add(fillPlaceholders(templateFile, generatedFile, new HashedMap<>()));
         }
     }
 
