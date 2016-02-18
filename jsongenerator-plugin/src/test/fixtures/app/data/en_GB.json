@@ -8,7 +8,6 @@
   "city_from": "London",
   "city_to": "Manchester",
   "stopovers": "stopovers",
-  "stopver1": "Glasgow",
-  "stopver2": "..."
-
+  "stopover1": "Glasgow",
+  "stopover2": "Liverpool"
 }

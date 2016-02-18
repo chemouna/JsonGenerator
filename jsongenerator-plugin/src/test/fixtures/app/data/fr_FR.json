@@ -8,6 +8,6 @@
   "city_from": "Paris",
   "city_to": "Lyon",
   "stopovers": "Arrêts intermediaires",
-  "stopver1": "Nantes",
-  "stopver2": "Lille"
+  "stopover1": "Nantes",
+  "stopover2": "Lille"
 }

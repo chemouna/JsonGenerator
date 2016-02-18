@@ -7,9 +7,8 @@
 
   "city_from": "Madrid",
   "city_to": "Barcelona",
-  "stopovers": "...",
-  "stopver1": "...",
-  "stopver2": "..."
-
+  "stopovers": "puentes",
+  "stopover1": "Valence",
+  "stopover2": "Malaga"
 
 }
