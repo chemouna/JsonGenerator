@@ -49,7 +49,7 @@ class GenerateDynamicJsonTask extends DefaultTask implements GenerateDynamicJson
     static def fillPlaceholders(File inputFile, File outputFile, Object data) {
         def inputFileText = inputFile.getText('UTF-8')
         data.findAll({ it -> inputFileText.contains("{{${it.key}}") })
-                .collect { inputFileText = inputFileText.replaceAll("\\{\\{"+ it.key +"\\}\\}", it.value.toString()) }
+                .collect { inputFileText = inputFileText.replaceAll("\\{\\{${it.key}\\}\\}", it.value.toString()) }
         outputFile.write(inputFileText, 'UTF-8')
         outputFile
     }
