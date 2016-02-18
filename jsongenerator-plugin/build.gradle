@@ -6,9 +6,11 @@ buildscript {
         }
     }
     dependencies {
+        classpath "com.gradle.publish:plugin-publish-plugin:0.9.3"
     }
 }
 
+apply plugin: "com.gradle.plugin-publish"
 apply plugin: 'groovy'
 
 repositories {
@@ -19,3 +21,23 @@ dependencies {
     compile localGroovy()
     compile gradleApi()
 }
+
+version = VERSION_NAME
+group = GROUP
+
+pluginBundle {
+    website = 'https://github.com/chemouna'
+    vcsUrl = 'https://github.com/chemouna'
+    description = 'Generates localized json with custom data'
+    tags = ['json', 'generate', 'custom', 'data', "localized"]
+
+    plugins {
+        GenerateJsonPlugin {
+            id = 'com.mounacheikhna.jsongenerator'
+            displayName = 'Json Generator Plugin'
+        }
+    }
+}
+
+apply from: 'https://github.com/mcxiaoke/gradle-mvn-push/raw/master/gradle-mvn-push.gradle'
+
