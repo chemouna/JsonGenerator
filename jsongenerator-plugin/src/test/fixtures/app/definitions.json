@@ -1,9 +1,10 @@
 {
-  "locales": [
+  "supportedLocales": ["fr_FR", "en_GB", "es_ES"],
+  "jsons": [
     {
       "generatedName": "{{locale}}_generated_person",
       "template": "template_person",
-      "url_search": [
+      "urlSearch": [
         "/api/user"
       ]
     }

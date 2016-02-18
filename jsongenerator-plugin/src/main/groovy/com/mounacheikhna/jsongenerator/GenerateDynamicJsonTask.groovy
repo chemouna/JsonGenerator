@@ -11,7 +11,6 @@ import org.gradle.api.tasks.TaskAction
  */
 class GenerateDynamicJsonTask extends DefaultTask implements GenerateDynamicJsonSpec {
 
-    private String locale
     private String propertiesPath
     private String imagesPropertiesFilePath
     private String jsonPropertiesFilePath
@@ -26,17 +25,19 @@ class GenerateDynamicJsonTask extends DefaultTask implements GenerateDynamicJson
             throw new IllegalArgumentException("Please provide a correct path to properties file : $propertiesPath ")
         }
         slurper = new JsonSlurper()
-        generateDynamicJsons(locale, jsonPropertiesFilePath)
+        def definitions = this.slurper.parse(new File("${getProject().projectDir.getPath()}/${jsonPropertiesFilePath}"))
+
+        definitions.supportedLocales.each {
+            String it -> generateDynamicJsons(it, definitions)
+        }
     }
 
-    void generateDynamicJsons(String locale, String jsonPropertiesPath) {
+    void generateDynamicJsons(String locale, Object definitions) {
         File generatedFolder = new File("${project.projectDir.getPath()}/generated")
         generatedFolder.mkdirs()
         File dataFolder = new File("${project.projectDir.getPath()}/data")
-        def definitions = this.slurper.parse(new File("${getProject().projectDir.getPath()}/${jsonPropertiesPath}")) //
-
         def ourSlurper = this.slurper
-        definitions.locales.each {
+        definitions.jsons.each {
             String generatedFileName = it.generatedName.replace("{{locale}}", locale);
             File generatedFile = new File("${generatedFolder.getPath()}/$generatedFileName")
             File templateFile = new File("${project.projectDir}/templates/${it.template}.json")
@@ -54,11 +55,6 @@ class GenerateDynamicJsonTask extends DefaultTask implements GenerateDynamicJson
         outputFile
     }
 
-
-    @Override
-    void locale(String locale) {
-        this.locale = locale
-    }
 
     @Override
     void productFlavor(String productFlavor) {
@@ -81,7 +77,6 @@ class GenerateDynamicJsonTask extends DefaultTask implements GenerateDynamicJson
     }
 
     interface GenerateDynamicJsonSpec  {
-        void locale(String locale)
         void productFlavor(String productFlavor)
         void propertiesPath(String propertiesPath)
         void imagesPropertiesFilePath(String imagesPropertiesFilePath)
