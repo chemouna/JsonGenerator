@@ -7,6 +7,13 @@
       "urlSearch": [
         "/api/user"
       ]
+    },
+    {
+      "generatedName": "{{locale}}_generated_route",
+      "template": "template_route",
+      "urlSearch": [
+        "/api/route"
+      ]
     }
   ]
 }

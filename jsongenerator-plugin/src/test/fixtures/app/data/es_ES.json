@@ -3,5 +3,13 @@
   "lastname": "Jose",
   "city": "Madrid",
   "country": "Spain",
-  "message": "Hola !"
+  "message": "Hola !",
+
+  "city_from": "Madrid",
+  "city_to": "Barcelona",
+  "stopovers": "...",
+  "stopver1": "...",
+  "stopver2": "..."
+
+
 }

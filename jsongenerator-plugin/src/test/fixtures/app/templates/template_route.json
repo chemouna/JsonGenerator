@@ -1,0 +1,5 @@
+{
+  "from": "{{city_from}}",
+  "to": "{{city_to}}",
+  "stopovers": "2 {{stopovers}} : {{stopover1}}, {{stopover2}}"
+}

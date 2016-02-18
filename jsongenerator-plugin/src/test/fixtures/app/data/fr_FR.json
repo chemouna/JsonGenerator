@@ -3,5 +3,11 @@
   "lastname": "Lettelier",
   "city": "Paris",
   "country": "France",
-  "message": "Salut"
+  "message": "Salut",
+
+  "city_from": "Paris",
+  "city_to": "Lyon",
+  "stopovers": "Arrêts intermediaires",
+  "stopver1": "Nantes",
+  "stopver2": "Lille"
 }
