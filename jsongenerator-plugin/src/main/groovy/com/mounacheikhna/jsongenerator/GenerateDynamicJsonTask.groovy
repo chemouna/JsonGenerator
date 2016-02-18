@@ -1,7 +1,6 @@
 package com.mounacheikhna.jsongenerator
 
 import groovy.json.JsonSlurper
-import org.apache.commons.collections.map.HashedMap
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 
@@ -12,11 +11,9 @@ import org.gradle.api.tasks.TaskAction
 class GenerateDynamicJsonTask extends DefaultTask implements GenerateDynamicJsonSpec {
 
     private String propertiesPath
-    private String imagesPropertiesFilePath
-    private String jsonPropertiesFilePath
+    private String imagesPropertiesPath
+    private String jsonPropertiesPath
 
-    private List<File> generatedFiles
-    private String productFlavor
     private JsonSlurper slurper
 
     @TaskAction
@@ -25,7 +22,7 @@ class GenerateDynamicJsonTask extends DefaultTask implements GenerateDynamicJson
             throw new IllegalArgumentException("Please provide a correct path to properties file : $propertiesPath ")
         }
         slurper = new JsonSlurper()
-        def definitions = this.slurper.parse(new File("${getProject().projectDir.getPath()}/${jsonPropertiesFilePath}"))
+        def definitions = this.slurper.parse(new File("${getProject().projectDir.getPath()}/${jsonPropertiesPath}"))
 
         definitions.supportedLocales.each {
             String it -> generateDynamicJsons(it, definitions)
@@ -57,29 +54,23 @@ class GenerateDynamicJsonTask extends DefaultTask implements GenerateDynamicJson
 
 
     @Override
-    void productFlavor(String productFlavor) {
-        this.productFlavor = productFlavor
-    }
-
-    @Override
     void propertiesPath(String propertiesPath) {
         this.propertiesPath = propertiesPath
     }
 
     @Override
-    void imagesPropertiesFilePath(String imagesPropertiesFilePath) {
-        this.imagesPropertiesFilePath = imagesPropertiesFilePath
+    void imagesPropertiesPath(String imagesPropertiesPath) {
+        this.imagesPropertiesPath = imagesPropertiesPath
     }
 
     @Override
-    void jsonPropertiesFilePath(String jsonPropertiesFilePath) {
-        this.jsonPropertiesFilePath = jsonPropertiesFilePath
+    void jsonPropertiesPath(String jsonPropertiesFilePath) {
+        this.jsonPropertiesPath = jsonPropertiesFilePath
     }
 
     interface GenerateDynamicJsonSpec  {
-        void productFlavor(String productFlavor)
         void propertiesPath(String propertiesPath)
-        void imagesPropertiesFilePath(String imagesPropertiesFilePath)
-        void jsonPropertiesFilePath(String productFlavor)
+        void imagesPropertiesPath(String imagesPropertiesPath)
+        void jsonPropertiesPath(String jsonPropertiesPath)
     }
 }

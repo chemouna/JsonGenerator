@@ -25,9 +25,8 @@ class GenerateDynamicJsonTest {
     public void testGenerateJson() {
         Task generateTask = project.tasks.create("generateDynamicJson", GenerateDynamicJsonTask.class)
         generateTask.propertiesPath("locales.properties")
-        generateTask.imagesPropertiesFilePath("images.properties")
-        generateTask.jsonPropertiesFilePath("definitions.json")
-        generateTask.productFlavor("experiment")
+        generateTask.imagesPropertiesPath("images.properties")
+        generateTask.jsonPropertiesPath("definitions.json")
         generateTask.execute()
     }
 

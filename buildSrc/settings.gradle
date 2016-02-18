@@ -1,0 +1,2 @@
+include ':jsongenerator-plugin'
+project(':jsongenerator-plugin').projectDir = new File('../jsongenerator-plugin')
