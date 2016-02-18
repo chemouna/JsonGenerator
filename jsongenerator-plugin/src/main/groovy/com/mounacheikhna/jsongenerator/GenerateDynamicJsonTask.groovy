@@ -26,28 +26,29 @@ class GenerateDynamicJsonTask extends DefaultTask implements GenerateDynamicJson
             throw new IllegalArgumentException("Please provide a correct path to properties file : $propertiesPath ")
         }
         slurper = new JsonSlurper()
-        generateDynamicJsons(locale, jsonPropertiesFilePath, propertiesPath, imagesPropertiesFilePath)
-
+        generateDynamicJsons(locale, jsonPropertiesFilePath)
     }
 
-    void generateDynamicJsons(String locale, String jsonPropetiesPath, String propertiesPath, String imagesPropertiesPath) {
+    void generateDynamicJsons(String locale, String jsonPropertiesPath) {
         File generatedFolder = new File("${project.projectDir.getPath()}/generated")
         generatedFolder.mkdirs()
-        def definitions = slurper.parse(new File("${getProject().projectDir.getPath()}/${jsonPropetiesPath}.json"))
+        File dataFolder = new File("${project.projectDir.getPath()}/data")
+        def definitions = this.slurper.parse(new File("${getProject().projectDir.getPath()}/${jsonPropertiesPath}")) //
 
+        def ourSlurper = this.slurper
         definitions.locales.each {
             String generatedFileName = it.generatedName.replace("{{locale}}", locale);
             File generatedFile = new File("${generatedFolder.getPath()}/$generatedFileName")
-            File templateFile = new File("${it.template}.json")
+            File templateFile = new File("${project.projectDir}/templates/${it.template}.json")
 
-            //TODO: get custom data and pass it here
-            generatedFiles.add(fillPlaceholders(templateFile, generatedFile, new HashedMap<>()));
+            def data = ourSlurper.parse(new File("${dataFolder}/${locale}.json")) //here
+            fillPlaceholders(templateFile, generatedFile, data)
         }
     }
 
-    static def fillPlaceholders(File inputFile, File outputFile, Map<String, String> properties) {
+    static def fillPlaceholders(File inputFile, File outputFile, Object data) {
         def inputFileText = inputFile.getText('UTF-8')
-        properties.each {
+        data.properties.each {
             key, value ->
                 if(inputFileText.contains("{{$key}}")) {
                     inputFileText = inputFileText.replaceAll("{{$key}}", value.toString())

@@ -1,0 +1,7 @@
+{
+   "firstname": "{{firstname}}",
+   "lastname": "{{lastname}}",
+   "city": "{{city}}",
+   "country": "{{country}}",
+   "message": "user message : {{message}}"
+}
