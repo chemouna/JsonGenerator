@@ -27,12 +27,12 @@ group = GROUP
 
 pluginBundle {
     website = 'https://github.com/chemouna'
-    vcsUrl = 'https://github.com/chemouna'
+    vcsUrl = 'https://github.com/chemouna/JsonGenerator'
     description = 'Generates localized json with custom data'
     tags = ['json', 'generate', 'custom', 'data', "localized"]
 
     plugins {
-        GenerateJsonPlugin {
+        jsonGeneratorPlugin {
             id = 'com.mounacheikhna.jsongenerator'
             displayName = 'Json Generator Plugin'
         }
