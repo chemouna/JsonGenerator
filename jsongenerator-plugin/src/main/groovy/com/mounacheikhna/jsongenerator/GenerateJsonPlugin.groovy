@@ -13,11 +13,12 @@ class GenerateJsonPlugin implements Plugin<Project> {
         project.extensions.create("jsonGenerator", GenerateJsonExtension)
         project.afterEvaluate {
             project.tasks.create(name: "GenerateJsonFiles",
-                    type: GenerateDynamicJsonTask,
+                    type: GenerateJsonTask,
                     group: "Generate Json") {
-                propertiesPath project.jsonGenerator.propertiesPath
-                imagesPropertiesPath project.jsonGenerator.imagesPropertiesPath
-                jsonPropertiesPath project.jsonGenerator.jsonPropertiesPath
+                firstPassConfig("${project.projectDir}/src/$screenshotProductFlavor/assets/$localeFileName", "##", "##", false)
+                secondPassConfig("${project.projectDir}/${project.screenshots.imagesConfigFilePath}", "", "", false)
+                productFlavor("custom")
+                jsonsMappings([:])
             }
         }
     }

@@ -1,0 +1,7 @@
+{
+   "firstname": "John",
+   "lastname": "Doe",
+   "city": "London",
+   "country": "Britain",
+   "message": "user message : Hi there !"
+}
