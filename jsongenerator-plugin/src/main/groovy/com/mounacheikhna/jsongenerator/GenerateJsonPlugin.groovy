@@ -15,8 +15,18 @@ class GenerateJsonPlugin implements Plugin<Project> {
             project.tasks.create(name: "GenerateJsonFiles",
                     type: GenerateJsonTask,
                     group: "Generate Json") {
-                firstPassConfig("${project.projectDir}/src/$screenshotProductFlavor/assets/$localeFileName", "##", "##", false)
-                secondPassConfig("${project.projectDir}/${project.screenshots.imagesConfigFilePath}", "", "", false)
+
+                //TODO: this is a good use case for gradle container here
+                firstPassConfig(project.jsonGenerator.firstPassConfig,
+                        project.jsonGenerator.firstPassConfig.startDelimiter,
+                        project.jsonGenerator.firstPassConfig.endDelimiter,
+                        project.jsonGenerator.firstPassConfig.escape)
+
+                secondPassConfig(project.jsonGenerator.secondPa ssConfig,
+                        project.jsonGenerator.secondPassConfig.startDelimiter,
+                        project.jsonGenerator.secondPassConfig.endDelimiter,
+                        project.jsonGenerator.secondPassConfig.escape)
+
                 productFlavor("custom")
                 jsonsMappings([:])
             }
