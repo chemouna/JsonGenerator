@@ -1,4 +1,2 @@
-include ':jsongenerator'
 include ':jsongenerator-plugin'
-project(':jsongenerator').projectDir = new File('../jsongenerator')
 project(':jsongenerator-plugin').projectDir = new File('../jsongenerator-plugin')

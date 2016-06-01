@@ -15,12 +15,13 @@ apply plugin: 'groovy'
 
 repositories {
     jcenter()
+    mavenCentral()
 }
 
 dependencies {
     compile localGroovy()
     compile gradleApi()
-    compile project(":jsongenerator")
+    compile "com.mounacheikhna.jsongenerator:jsongenerator:0.4.3"
 }
 
 version = VERSION_NAME
