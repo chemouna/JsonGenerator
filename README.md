@@ -19,7 +19,7 @@ Usage
    For the capture lib to take screenshots in tests :
 
    ```gradle
-       compile "com.mounacheikhna.jsongenerator:jsongenerator:0.4.3"
+       compile "com.mounacheikhna.jsongenerator:jsongenerator:0.4.5"
    ```
 
 

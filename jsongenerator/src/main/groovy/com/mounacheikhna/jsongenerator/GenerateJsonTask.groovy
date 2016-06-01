@@ -1,5 +1,6 @@
 package com.mounacheikhna.jsongenerator
 
+import org.apache.jasper.xmlparser.ParserUtils
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 
@@ -126,7 +127,7 @@ public class GenerateJsonTask extends DefaultTask implements GenerateJsonSpec {
 
         void extractValues() {
             if (filePath?.trim()) {
-                extractedValues = ParseUtils.valuesFromFile(new File(filePath))
+                extractedValues = ParserUtils.valuesFromFile(new File(filePath))
             }
         }
 

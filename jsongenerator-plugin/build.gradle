@@ -21,7 +21,7 @@ repositories {
 dependencies {
     compile localGroovy()
     compile gradleApi()
-    compile "com.mounacheikhna.jsongenerator:jsongenerator:0.4.3"
+    compile "com.mounacheikhna.jsongenerator:jsongenerator:0.4.5"
 }
 
 version = VERSION_NAME
