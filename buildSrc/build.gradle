@@ -6,5 +6,6 @@ repositories {
 }
 
 rootProject.dependencies {
+  compile project(':jsongenerator')
   compile project(':jsongenerator-plugin')
 }

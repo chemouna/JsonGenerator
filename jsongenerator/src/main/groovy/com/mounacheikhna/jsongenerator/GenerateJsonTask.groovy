@@ -53,8 +53,8 @@ public class GenerateJsonTask extends DefaultTask implements GenerateJsonSpec {
     }
 
     @Override
-    void jsonFiles(Map<String, String> jsonFiles) {
-        this.jsonMappings.putAll(jsonFiles)
+    void jsonsMappings(Map<String, String> mapping) {
+        this.jsonMappings.putAll(mapping)
     }
 
     private void generateJsonForLocale() {

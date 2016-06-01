@@ -1,1 +1,1 @@
-include ':app', ':jsongenerator-plugin'
+include ':app', ':jsongenerator-plugin', ':jsongenerator'

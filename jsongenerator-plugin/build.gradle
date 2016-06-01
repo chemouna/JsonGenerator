@@ -20,6 +20,7 @@ repositories {
 dependencies {
     compile localGroovy()
     compile gradleApi()
+    compile project(":jsongenerator")
 }
 
 version = VERSION_NAME
