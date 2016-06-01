@@ -1,10 +1,27 @@
+buildscript {
+  repositories {
+    jcenter()
+  }
+}
+
 apply plugin: 'groovy'
 
+group = 'com.mounacheikhna.jsongenerator'
+
 repositories {
+  mavenCentral()
   jcenter()
+  maven {
+    url "https://oss.sonatype.org/content/repositories/snapshots"
+  }
+  maven {
+    url "https://jitpack.io"
+  }
 }
 
 dependencies {
   compile localGroovy()
   compile gradleApi()
 }
+
+apply from: 'https://github.com/mcxiaoke/gradle-mvn-push/raw/master/gradle-mvn-push.gradle'
