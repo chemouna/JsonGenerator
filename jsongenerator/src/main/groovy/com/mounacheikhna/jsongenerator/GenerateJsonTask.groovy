@@ -1,6 +1,5 @@
 package com.mounacheikhna.jsongenerator
 
-import org.apache.jasper.xmlparser.ParserUtils
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 
@@ -16,10 +15,10 @@ public class GenerateJsonTask extends DefaultTask implements GenerateJsonSpec {
     private PassConfig secondPassConfig
     private List<File> generatedFiles
     private String productFlavor
-    private Map<String, String> jsonMappings = [:]
+    private Map<String, String> jsonsMappings = [:]
 
     @TaskAction
-    void performTask() {
+    public void performTask() {
         generatedFiles = new ArrayList<>()
         if (firstPassConfig == null) {
             throw new IllegalArgumentException("Please provide a config file.")
@@ -30,32 +29,32 @@ public class GenerateJsonTask extends DefaultTask implements GenerateJsonSpec {
     }
 
     @Override
-    void locale(String locale) {
+    public void locale(String locale) {
         this.locale = locale
     }
 
     @Override
-    void firstPassConfig(String firstPassConfigPath, String startKeyDelimiter, String endKeyDelimiter,
+    public void firstPassConfig(String firstPassConfigPath, String startKeyDelimiter, String endKeyDelimiter,
                          boolean escaped) {
         firstPassConfig =
                 new PassConfig(firstPassConfigPath, startKeyDelimiter, endKeyDelimiter, escaped)
     }
 
     @Override
-    void secondPassConfig(String secondPassConfigPath, String startKeyDelimiter,
+    public void secondPassConfig(String secondPassConfigPath, String startKeyDelimiter,
                           String endKeyDelimiter, boolean escaped) {
         secondPassConfig =
                 new PassConfig(secondPassConfigPath, startKeyDelimiter, endKeyDelimiter, escaped)
     }
 
     @Override
-    void productFlavor(String productFlavor) {
+    public void productFlavor(String productFlavor) {
         this.productFlavor = productFlavor
     }
 
     @Override
-    void jsonsMappings(Map<String, String> mapping) {
-        this.jsonMappings.putAll(mapping)
+    public void jsonsMappings(Map<String, String> mapping) {
+        this.jsonsMappings.putAll(mapping)
     }
 
     private void generateJsonForLocale() {
@@ -65,13 +64,13 @@ public class GenerateJsonTask extends DefaultTask implements GenerateJsonSpec {
         jsonConfig.createJsons()
     }
 
-    class JsonConfig {
+    public class JsonConfig {
         private String locale
         private String baseFolder
         PassConfig firstPassConfig
         PassConfig secondPassConfig
 
-        JsonConfig(String locale, String productFlavor, PassConfig firstPassConfig,
+        public JsonConfig(String locale, String productFlavor, PassConfig firstPassConfig,
                    PassConfig secondPassConfig) {
             this.locale = locale
             this.firstPassConfig = firstPassConfig
@@ -80,7 +79,7 @@ public class GenerateJsonTask extends DefaultTask implements GenerateJsonSpec {
         }
 
         void createJsons() {
-            jsonMappings.each {
+            jsonsMappings.each {
                 placeholder, newFileName ->
                     createJson(placeholder, newFileName.toLowerCase())
             }
@@ -110,7 +109,7 @@ public class GenerateJsonTask extends DefaultTask implements GenerateJsonSpec {
         }
     }
 
-    class PassConfig {
+    public class PassConfig {
         String filePath
         String startKeyDelimiter
         String endKeyDelimiter
@@ -118,20 +117,20 @@ public class GenerateJsonTask extends DefaultTask implements GenerateJsonSpec {
 
         Map<String, String> extractedValues = [:]
 
-        PassConfig(String filePath, String startKeyDelimiter, String endKeyDelimiter, boolean escaped) {
+        public PassConfig(String filePath, String startKeyDelimiter, String endKeyDelimiter, boolean escaped) {
             this.filePath = filePath
             this.startKeyDelimiter = startKeyDelimiter
             this.endKeyDelimiter = endKeyDelimiter
             this.escaped = escaped
         }
 
-        void extractValues() {
+        public void extractValues() {
             if (filePath?.trim()) {
-                extractedValues = ParserUtils.valuesFromFile(new File(filePath))
+                extractedValues = ParseUtils.valuesFromFile(new File(filePath))
             }
         }
 
-        boolean validate() {
+        public boolean validate() {
             if (filePath?.trim() && !new File(filePath).exists()) {
                 throw new IllegalArgumentException(
                         "Please provide a correct path to config file : $filePath ")

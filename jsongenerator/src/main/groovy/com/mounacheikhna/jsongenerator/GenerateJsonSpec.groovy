@@ -1,14 +1,13 @@
 package com.mounacheikhna.jsongenerator
 
+public interface GenerateJsonSpec {
 
-interface GenerateJsonSpec {
-
-    void locale(String locale)
-    void firstPassConfig(String firstPassConfigPath, String startKeyDelimiter,
+    public void locale(String locale)
+    public void firstPassConfig(String firstPassConfigPath, String startKeyDelimiter,
                          String endKeyDelimiter, boolean escaped)
-    void secondPassConfig(String secondPassConfigPath, String startKeyDelimiter,
+    public void secondPassConfig(String secondPassConfigPath, String startKeyDelimiter,
                           String endKeyDelimiter, boolean escaped)
-    void productFlavor(String productFlavor)
-    void jsonsMappings(Map<String, String> mapping)
+    public void productFlavor(String productFlavor)
+    public void jsonsMappings(Map<String, String> mapping)
 
 }

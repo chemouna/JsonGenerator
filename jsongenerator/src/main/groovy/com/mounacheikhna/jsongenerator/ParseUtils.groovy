@@ -26,7 +26,7 @@ final class ParseUtils {
         properties.each {
             values.put(it.key.toString(), it.value.toString())
         }
-        return
+        return values
     }
 
     public static Map<String, String> fromJson(File file) {
@@ -44,7 +44,7 @@ final class ParseUtils {
         Properties properties = new Properties()
         File propertiesFile = new File(path)
         properties.load(propertiesFile.newDataInputStream())
-        properties
+        return  properties
     }
 
 }
